@@ -1,0 +1,33 @@
+# https://travis-ci.org/HearthSim/decrunch
+dist: xenial
+language: python
+
+python:
+  - 3.5
+  - 3.6
+  - 3.7
+
+cache: pip
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-8
+
+env:
+  - CXX=g++-8
+
+install:
+  - pip install --upgrade pip wheel setuptools
+  - pip install Cython
+  - pip install .
+
+script:
+  - pytest -v
+
+notifications:
+  email:
+    on_failure: always
+    on_success: change
